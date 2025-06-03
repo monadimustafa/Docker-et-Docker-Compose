@@ -1,0 +1,7 @@
+net\youssfi\backend\entities\CryptoCurrency.class
+net\youssfi\backend\web\HotelsController.class
+net\youssfi\backend\repository\CryptoCurrencyRepository.class
+net\youssfi\backend\web\ChabotController.class
+net\youssfi\backend\entities\CryptoCurrency$CryptoCurrencyBuilder.class
+net\youssfi\backend\BackendApplication.class
+net\youssfi\backend\loader\DataLoader.class

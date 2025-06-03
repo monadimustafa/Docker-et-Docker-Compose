@@ -1,0 +1,39 @@
+services:
+  pgvector:
+    container_name: pgdb-store
+    image: 'pgvector/pgvector:pg16'
+    environment:
+      - 'POSTGRES_DB=dbCryptoCurrency'
+      - 'POSTGRES_PASSWORD=root'
+      - 'POSTGRES_USER=postgres'
+    volumes:
+      - chatbot_data:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+    networks:
+      - chatbot-net
+  chatbot-back:
+    build: ./backend
+    container_name: chatbot-back
+    environment:
+      - DB_URL=jdbc:postgresql://localhost:5433/dbCryptoCurrency
+    ports:
+      - '8074:8074'
+    networks:
+      - chatbot-net
+    depends_on:
+      - pgvector
+  chatbot-front:
+    build: ./frontend
+    container_name: chatbot-front
+    ports:
+      - '8087:80'
+    networks:
+      - chatbot-net
+    depends_on:
+      - chatbot-back
+volumes:
+  chatbot_data:
+networks:
+  chatbot-net:
+    driver: bridge
